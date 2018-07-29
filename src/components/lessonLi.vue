@@ -1,23 +1,34 @@
 <template>
-    <div class="lesson margin-b10">
+    <div class="lesson margin-b10" @click="gotoInfo">
         <div class="lesson-img">
-            <image class="img" :src="lesson.img" />
+            <image class="img" :lazy-load="true" mode="widthFix" :src="imgUrl + lesson.image"/>
         </div>
         <div class="lesson-info">
             <div class="lesson-top">
-                <div class="lesson-title">{{lesson.title}}</div>
-                <div class="lesson-label">{{lesson.type}}</div>
+                <div class="lesson-title">{{lesson.name}}</div>
+                <div class="lesson-label">{{lesson.label}}</div>
             </div>
-            <div class="lesson-middle">{{lesson.use}}</div>
-            <div class="lesson-bottom">{{lesson.time}}</div>
+            <div class="lesson-middle">已上课时{{lesson.num}}/总课时{{lesson.totalNum}}</div>
+            <div class="lesson-bottom">到期时间：{{lesson.validityDate}}</div>
         </div>
     </div>
 </template>
 
 <script>
+import { _imgUrl } from '../utils'
 export default {
     props: {
         lesson: Object
+    },
+    computed: {
+        imgUrl: () => _imgUrl
+    },
+    methods: {
+        gotoInfo() {
+            wx.navigateTo({
+                url: `/pages/lessonInfo/main?id=${this.lesson.productId}`
+            })
+        }
     }
 }
 </script>

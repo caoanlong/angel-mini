@@ -1,25 +1,34 @@
 <template>
     <div class="order margin-b10 wx-1px-b">
         <div class="order-top wx-1px-b">
-            <div class="order-time">下单时间：2018-05-03 11:20:25</div>
-            <div class="order-status">支付成功</div>
+            <div class="order-time">下单时间：{{order.createTime}}</div>
+            <div class="order-status">
+                <span v-if="order.status == 'success'">支付成功</span>
+                <span style="color: red" v-else>支付失败</span>
+            </div>
         </div>
         <div class="order-bottom">
             <div class="order-img">
-                <image class="img" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2813434517,83142011&fm=200&gp=0.jpg" />
+                <image class="img" :src="imgUrl + order.image"/>
             </div>
             <div class="order-info">
-                <div class="order-title">正姿舞蹈</div>
-                <div class="order-remark">10节课体验卡</div>
+                <div class="order-title">{{order.name}}</div>
+                <div class="order-remark">{{order.label}}</div>
             </div>
-            <div class="order-price">¥200</div>
+            <div class="order-price">¥{{order.totalPrice}}</div>
         </div>
     </div>
 </template>
 
 <script>
+import { _imgUrl } from '../utils'
 export default {
-    
+    props: {
+        order: Object
+    },
+    computed: {
+        imgUrl: () => _imgUrl
+    }
 }
 </script>
 
