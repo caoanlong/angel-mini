@@ -1,7 +1,7 @@
 <template>
     <div class="goods-container">
         <div class="goods-img">
-            <image :src="imgUrl + lesson.image" mode="widthFix"/>
+            <image :src="lesson.image" mode="widthFix"/>
         </div>
         <div class="goods-text">
             <div class="goods-title">{{lesson.name}}<div class="goods-label">{{lesson.label.value}}</div></div>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { _imgUrl } from '../../utils'
+import { _imgUrl, resizeImg } from '../../utils'
 import buyTool from '../../components/buyTool'
 import Product from '../../api/Product'
 export default {
@@ -32,16 +32,15 @@ export default {
             }
         }
     },
-    computed: {
-        imgUrl: () => _imgUrl
-    },
     onLoad(option) {
         this.getInfo(option.id)
     },
     methods: {
         getInfo(productId) {
             Product.findById({ productId }).then(res => {
-                this.lesson = res
+                const data = res
+                data.image = resizeImg(res.image, '400x400')
+                this.lesson = data
             })
         }
     }

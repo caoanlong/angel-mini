@@ -3,7 +3,7 @@
         <div class="title-left">{{name}}</div>
         <div class="title-right">
             <div class="title-right-txt">
-                <img class="title-avatar" :src="imgUrl + info" v-if="info"/>
+                <img class="title-avatar" :src="info" v-if="info"/>
                 <img class="title-avatar" src="../../static/icons/defaultAvatar.png" v-else/>
             </div>
         </div>
@@ -20,14 +20,6 @@ export default {
         name: String,
         info: String,
         href: String
-    },
-    computed: {
-        imgUrl: () => _imgUrl
-    },
-    onShow() {
-        // console.log(this.info)
-    },
-    methods: {
     }
 }
 </script>

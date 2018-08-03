@@ -1,7 +1,7 @@
 <template>
     <div class="lesson margin-b10" @click="gotoInfo">
         <div class="lesson-img">
-            <image class="img" :lazy-load="true" mode="widthFix" :src="imgUrl + lesson.image"/>
+            <image class="img" :lazy-load="true" mode="widthFix" :src="lesson.image"/>
         </div>
         <div class="lesson-info">
             <div class="lesson-top">
@@ -15,13 +15,9 @@
 </template>
 
 <script>
-import { _imgUrl } from '../utils'
 export default {
     props: {
         lesson: Object
-    },
-    computed: {
-        imgUrl: () => _imgUrl
     },
     methods: {
         gotoInfo() {

@@ -2,7 +2,7 @@
     <div class="remark-card">
         <div class="remark-top">
             <div class="remark-left">
-                <img class="remark-avatar" :src="imgUrl + remark.avatar" v-if="remark.avatar"/>
+                <img class="remark-avatar" :src="remark.avatar" v-if="remark.avatar"/>
                 <img class="remark-avatar" src="../../static/icons/defaultAvatar.png" v-else/>
             </div>
             <div class="remark-right">
@@ -18,23 +18,11 @@
 </template>
 
 <script>
-import { _imgUrl } from '../utils'
 export default {
     props: {
         remark: {
             type: Object
         }
-    },
-    data() {
-        return {
-        }
-    },
-    computed: {
-        imgUrl: () => _imgUrl
-    },
-    created() {
-    },
-    methods: {
     }
 }
 </script>

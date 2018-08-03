@@ -9,7 +9,7 @@
         </div>
         <div class="list" v-if="selectTab == '课间剪影'">
             <div class="left">
-                <photo-card 
+                <photo-card
                     v-if="index % 2 == 0" :card="card" 
                     v-for="(card, index) in cardList" :key="index">
                 </photo-card>
@@ -49,7 +49,7 @@ import LessonPhoto from '../../api/LessonPhoto'
 import HealthRecord from '../../api/HealthRecord'
 import TeacherAdvice from '../../api/TeacherAdvice'
 import AngelRemark from '../../api/AngelRemark'
-import { getDateFromDate } from '../../utils'
+import { getDateFromDate, resizeImg } from '../../utils'
 export default {
     components: {
         tabTop, loadStatus, photoCard, record, teacherAdvice, angelRemark
@@ -112,7 +112,7 @@ export default {
                         return {
                             lessonPhotoId: item.lessonPhotoId,
                             title: item.title,
-                            photo: item.photos.split(',')[0],
+                            photo: resizeImg(item.photos.split(',')[0], '300x300'),
                             createTime: getDateFromDate(item.createTime)
                         }
                     })
@@ -163,10 +163,10 @@ export default {
                     const list = res.rows.map(item => {
                         return {
                             teacherAdviceId: item.teacherAdviceId,
-                            avatar: item.person.avatar,
                             person: item.person.name,
                             personRemark: item.person.remark,
                             remark: item.remark,
+                            avatar: resizeImg(item.person.avatar, '100x100'),
                             createTime: getDateFromDate(item.createTime)
                         }
                     })
@@ -190,7 +190,7 @@ export default {
                     const list = res.rows.map(item => {
                         return {
                             angelRemarkId: item.angelRemarkId,
-                            avatar: item.member.avatar,
+                            avatar: resizeImg(item.member.avatar, '100x100'),
                             member: item.member.name,
                             remark: item.remark,
                             createTime: getDateFromDate(item.createTime)

@@ -9,7 +9,7 @@
 import lessonLi from '../../components/lessonLi'
 import loadStatus from '../../components/loadStatus'
 import Lesson from '../../api/Lesson'
-import { getDateFromDate } from '../../utils'
+import { getDateFromDate, resizeImg } from '../../utils'
 export default {
     components: {
         lessonLi, loadStatus
@@ -45,7 +45,7 @@ export default {
                         return {
                             lessonId: item.lessonId,
                             productId: item.productId,
-                            image: item.product.image,
+                            image: resizeImg(item.product.image, '200x200'),
                             name: item.product.name,
                             label: item.product.label && item.product.label.value,
                             num: item.num,

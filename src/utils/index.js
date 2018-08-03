@@ -32,4 +32,9 @@ export const getDateFromDate = function (input, bool) {
 	}
 }
 
+export function resizeImg(url, size) {
+	let arr = url.split('.')
+	return process.env.IMG_URL + arr[0] + `_${size}.` + arr[1]
+}
+
 export const _imgUrl = process.env.IMG_URL

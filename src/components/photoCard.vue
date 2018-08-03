@@ -1,6 +1,6 @@
 <template>
     <div class="photo-card" @click="gotoInfo">
-        <image class="photo-img" :lazy-load="true" mode="widthFix" :src="imgUrl + card.photo"/>
+        <image class="photo-img" lazy-load="true" mode="widthFix" :src="card.photo"/>
         <div class="photo-text">
             <div class="photo-title">{{card.title}}</div>
             <div class="photo-info">{{card.createTime}}</div>
@@ -9,19 +9,11 @@
 </template>
 
 <script>
-import { _imgUrl } from '../utils'
 export default {
     props: {
         card: {
             type: Object
         }
-    },
-    data() {
-        return {
-        }
-    },
-    computed: {
-        imgUrl: () => _imgUrl
     },
     methods: {
         gotoInfo() {

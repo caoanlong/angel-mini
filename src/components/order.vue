@@ -9,7 +9,7 @@
         </div>
         <div class="order-bottom">
             <div class="order-img">
-                <image class="img" :src="imgUrl + order.image"/>
+                <image class="img" :src="order.image"/>
             </div>
             <div class="order-info">
                 <div class="order-title">{{order.name}}</div>
@@ -21,13 +21,9 @@
 </template>
 
 <script>
-import { _imgUrl } from '../utils'
 export default {
     props: {
         order: Object
-    },
-    computed: {
-        imgUrl: () => _imgUrl
     }
 }
 </script>

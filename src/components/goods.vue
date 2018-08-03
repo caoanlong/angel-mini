@@ -1,9 +1,9 @@
 <template>
     <div class="goods" @click="gotoInfo()">
-        <image class="goods-img" mode="scaleToFill" :src="imgUrl + product.image"/>
+        <image class="goods-img" mode="scaleToFill" :src="product.image"/>
         <div class="goods-text">
             <div class="goods-title">{{product.name}}</div>
-            <div class="goods-info" v-if="product.label">{{product.label.value}}</div>
+            <div class="goods-info" v-if="product.label">{{product.label}}</div>
             <div class="goods-bottom">
                 <div class="price">¥{{product.price}}</div>
                 <div class="buy" @click.stop="pay">一键购买</div>
@@ -13,14 +13,10 @@
 </template>
 
 <script>
-import { _imgUrl } from '../utils'
 export default {
     props: {
         category: String,
         product: Object
-    },
-    computed: {
-        imgUrl: () => _imgUrl
     },
     methods: {
         gotoInfo() {

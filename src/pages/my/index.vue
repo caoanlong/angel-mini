@@ -2,7 +2,7 @@
     <div class="my-container">
         <div class="my-header" @click="gotoInfo('myInfo')">
             <div class="left">
-                <img class="my-avatar" :src="imgUrl + member.avatar" v-if="member.avatar"/>
+                <img class="my-avatar" :src="member.avatar" v-if="member.avatar"/>
                 <img class="my-avatar" src="../../../static/icons/defaultAvatar.png" v-else/>
             </div>
             <div class="right">
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import { _imgUrl } from '../../utils'
 import textLine from '../../components/textLine'
 import Auth from '../../api/Auth'
+import { resizeImg } from '../../utils'
 export default {
     components: {
         textLine
@@ -33,9 +33,6 @@ export default {
             member: {}
         }
     },
-    computed: {
-        imgUrl: () => _imgUrl
-    },
     onLoad() {
         const member = wx.getStorageSync('member')
         if (member) this.member = member
@@ -44,8 +41,10 @@ export default {
     methods: {
         getUserInfo() {
             Auth.getUserInfo().then(res => {
-                this.member = res.data.data
-                wx.setStorageSync('member', res.data.data)
+                const data = res.data.data
+                data.avatar = resizeImg(data.avatar, '100x100')
+                this.member = data
+                wx.setStorageSync('member', data)
             })
         },
         gotoInfo(href) {

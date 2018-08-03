@@ -67,6 +67,7 @@ import tabTop from '../../components/tabTop'
 import titleLine from '../../components/titleLine'
 import goods from '../../components/goods'
 import Product from '../../api/Product'
+import { resizeImg } from '../../utils'
 export default {
     components: {
         tabTop, titleLine, goods
@@ -112,12 +113,29 @@ export default {
         },
         getHotLessons() {
             Product.find({ pageSize: 2, type: 'lessonSet' }).then(res => {
-                this.hotLessons = res.rows
+                const list = res.rows.map(item => {
+                    return {
+                        productId: item.productId,
+                        image: resizeImg(item.image, '300x300'),
+                        name: item.name,
+                        label: item.label.value,
+                        price: item.price
+                    }
+                })
+                this.hotLessons = list
             })
         },
         getHotProducts() {
             Product.find({ pageSize: 2, type: 'platformProduct' }).then(res => {
-                this.hotProducts = res.rows
+                const list = res.rows.map(item => {
+                    return {
+                        productId: item.productId,
+                        image: resizeImg(item.image, '300x300'),
+                        name: item.name,
+                        price: item.price
+                    }
+                })
+                this.hotProducts = list
             })
         },
         getLessons() {
@@ -126,7 +144,16 @@ export default {
                 pageSize: this.pageSize, 
                 type: 'lessonSet'
             }).then(res => {
-                this.lessons.push(...res.rows)
+                const list = res.rows.map(item => {
+                    return {
+                        productId: item.productId,
+                        image: resizeImg(item.image, '300x300'),
+                        name: item.name,
+                        label: item.label.value,
+                        price: item.price
+                    }
+                })
+                this.lessons.push(...list)
             })
         },
         getProducts() {
@@ -135,7 +162,15 @@ export default {
                 pageSize: this.pageSize, 
                 type: 'platformProduct'
             }).then(res => {
-                this.products.push(...res.rows)
+                const list = res.rows.map(item => {
+                    return {
+                        productId: item.productId,
+                        image: resizeImg(item.image, '300x300'),
+                        name: item.name,
+                        price: item.price
+                    }
+                })
+                this.products.push(...list)
             })
         },
         onPullDownRefresh() {

@@ -9,7 +9,7 @@
 import order from '../../components/order'
 import loadStatus from '../../components/loadStatus'
 import Order from '../../api/Order'
-import { getDateFromDate } from '../../utils'
+import { getDateFromDate, resizeImg } from '../../utils'
 export default {
     components: {
         order, loadStatus
@@ -44,7 +44,7 @@ export default {
                     const list = res.rows.map(item => {
                         return {
                             orderId: item.orderId,
-                            image: item.product.image,
+                            image: resizeImg(item.product.image, '200x200'),
                             name: item.product.name,
                             label: item.product.label ? item.product.label.value : '',
                             totalPrice: item.totalPrice,
@@ -53,7 +53,6 @@ export default {
                         }
                     })
                     this.orders.push(...list)
-                    console.log(this.orders)
                     if (refresh) {
                         wx.hideNavigationBarLoading()
                         wx.stopPullDownRefresh()

@@ -2,7 +2,7 @@
     <div class="advice-card">
         <div class="advice-top">
             <div class="advice-left">
-                <img class="advice-avatar" :src="imgUrl + advice.avatar" v-if="advice.avatar"/>
+                <img class="advice-avatar" :src="advice.avatar" v-if="advice.avatar"/>
                 <img class="advice-avatar" src="../../static/icons/defaultAvatar.png" v-else/>
             </div>
             <div class="advice-right">
@@ -21,23 +21,11 @@
 </template>
 
 <script>
-import { _imgUrl } from '../utils'
 export default {
     props: {
         advice: {
             type: Object
         }
-    },
-    data() {
-        return {
-        }
-    },
-    computed: {
-        imgUrl: () => _imgUrl
-    },
-    created() {
-    },
-    methods: {
     }
 }
 </script>
