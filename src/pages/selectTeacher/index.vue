@@ -2,7 +2,7 @@
     <div class="main-content">
         <div class="docter wx-1px-b" v-for="teacher in teachers" :key="teacher.personId">
             <div class="left">
-                <image class="avatar" :src="imgUrl + teacher.avatar" v-if="teacher.avatar"/>
+                <image class="avatar" :src="teacher.avatar" v-if="teacher.avatar"/>
                 <image class="avatar" src="../../static/icons/defaultAvatar.png" v-else/>
             </div>
             <div class="right">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { _imgUrl } from '../../utils'
+import { resizeImg } from '../../utils'
 import Person from '../../api/Person'
 export default {
     data() {
@@ -25,9 +25,6 @@ export default {
             teachers: [],
             selected: {}
         }
-    },
-    computed: {
-        imgUrl: () => _imgUrl
     },
     created() {
         this.getList()
@@ -41,7 +38,15 @@ export default {
         },
         getList() {
             Person.suggest({ type: 'teacher'}).then(res => {
-                this.teachers = res.data.data
+                const list = res.data.data.map(item => {
+                    return {
+                        personId: item.personId,
+                        avatar: resizeImg(item.avatar, '100x100'),
+                        name: item.name,
+                        remark: item.remark
+                    }
+                })
+                this.teachers = list
             })
         }
     }

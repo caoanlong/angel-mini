@@ -1,7 +1,7 @@
 <template>
-    <div class="main-content">
+    <scroll-view scroll-y class="main-content">
         <image class="photo-img" :lazy-load="true" mode="widthFix" v-for="(item, index) in list" :key="index" :src="imgUrl + item" />
-    </div>
+    </scroll-view>
 </template>
 
 <script>
@@ -37,6 +37,7 @@ export default {
 <style lang="stylus" scoped>
 .main-content
     padding 5px
+    height 100%
     .photo-img
         display block
         width 100%

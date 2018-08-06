@@ -30,7 +30,6 @@
         <div v-else-if="selectTab == '天使留言'">
             <angel-remark v-for="remark in remarkList" :key="remark.angelRemarkId" :remark="remark"></angel-remark>
             <div class="add-remark-btn" @click="addRemark()">
-                <image class="add" mode="aspectFit" src="../../../static/icons/add.png"/>
                 <span class="txt">添加</span>
             </div>
         </div>
@@ -259,6 +258,7 @@ export default {
             flex 1
     .add-remark-btn
         position fixed
+        z-index 99
         bottom 20px
         right 20px
         width 56px
@@ -270,12 +270,10 @@ export default {
         color #ffffff
         background-color #78d300
         box-shadow 0px 2px 5px rgba(0,0,0,.2)
-        .add
-            position absolute
-            top 12px
-            left 20px
-            width 16px
-            height 16px
+        background-image url('../../../static/icons/add.png')
+        background-repeat no-repeat
+        background-size 16px
+        background-position 20px 12px
         .txt
             margin-top 10px
 </style>

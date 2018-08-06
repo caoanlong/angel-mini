@@ -8,7 +8,7 @@
             <!-- <text-line name="修改密码" href="modifyPassword"/> -->
         </div>
         <div class="cancel-btn">
-            <button type="default">解除微信绑定</button>
+            <button type="default" @click="exit">解除微信绑定</button>
         </div>
     </div>
 </template>
@@ -31,7 +31,10 @@ export default {
         if (member) this.member = member
     },
     methods: {
-        
+        exit() {
+            wx.clearStorage()
+            wx.reLaunch({ url: '/pages/login/main'})
+        }
     }
 }
 </script>

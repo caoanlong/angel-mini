@@ -12,14 +12,29 @@
 </template>
 
 <script>
+import { _imgUrl } from '../utils'
 export default {
 	props: {
 		record: Object
 	},
 	methods: {
 		gotoInfo() {
-            wx.navigateTo({
-                url: `/pages/record/main?file=${this.record.file}`
+            // wx.navigateTo({
+            //     url: `/pages/record/main?file=${this.record.file}`
+			// })
+			wx.showLoading({ title: '玩命加载中' })
+			wx.downloadFile({
+                url: _imgUrl + this.record.file,
+                success: (res) => {
+                    const filePath = res.tempFilePath
+                    wx.openDocument({
+                        filePath,
+                        fileType: 'pdf',
+                        success: (res) => {
+                            wx.hideLoading()
+                        }
+                    })
+                }
             })
         }
 	}
