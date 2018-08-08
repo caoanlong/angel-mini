@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import Order from '../api/Order'
 export default {
     props: {
         category: String,
@@ -35,7 +36,13 @@ export default {
                     console.log(res)
                 },
                 'fail': res =>{
-                    console.log(res)
+                    Order.add({ productId: this.product.productId}).then(res => {
+                        wx.showToast({
+                            title: '支付成功',
+                            icon: 'success',
+                            duration: 2000
+                        })
+                    })
                 }
             })
         }
