@@ -60,12 +60,19 @@ export default {
             }
             this.timeGo()
             Auth.getSmsCode({ mobile: this.mobile }).then(res => {
-                console.log(res.data)
-                wx.showToast({
-                    title: res.data.data,
-                    icon: 'success',
-                    duration: 2000
-                })
+                if (res.data.code != 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'error',
+                        duration: 2000
+                    })
+                } else {
+                    wx.showToast({
+                        title: '短信发送成功',
+                        icon: 'success',
+                        duration: 2000
+                    })
+                }
             })
         },
         /**
